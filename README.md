@@ -35,15 +35,15 @@ If everything starts correctly you should see a bunch of Spring Boot information
 # Testing the services
 
 Eureka server:
-http://localhost:8761/
+- http://localhost:8761/
 
 config server:
-http://localhost:8888/cityservice/default
+- http://localhost:8888/cityservice/default
 
 city service:
-http://localhost:8080/v1/city/all
-http://localhost:8080/v1/city/adjacents/casablanca
+- http://localhost:8080/v1/city/all
+- http://localhost:8080/v1/city/adjacents/casablanca
 
 itinerary service:
-http://localhost:8085/v1/itinerary/sortest?from=TETOUAN&to=agadir&criteria=connections
-http://localhost:8085/v1/itinerary/sortest?from=tetouan&to=dakhla
+- http://localhost:8085/v1/itinerary/sortest?from=TETOUAN&to=agadir&criteria=connections
+- http://localhost:8085/v1/itinerary/sortest?from=tetouan&to=dakhla
