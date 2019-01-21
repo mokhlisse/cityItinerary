@@ -2,7 +2,7 @@
 Welcome to City Itinerary Application which main goal is to calculate shortest way to travel from one city to another , independent of the departure time. The application allows also to expose the data related with a city defined with : city, destiny city, departure time, duration, stored in a data base.
 
 Application components are:
-1.  A Spring Cloud Config server that is deployed as Docker container (GitHub-based repository).
+1.  A Spring Cloud Config server that is deployed as Docker container (GitHub-based repository https://github.com/mokhlisse/config-repository/).
 2.  A Eureka server running as a Spring-Cloud based service.  This service will allow multiple service instances to register with it.
 3.  A city service that will expose the data related with a route (connection between 2 cities).
 4.  A itinerary service that will calculate the sortest way (in time and in connections) to travel from one city to another, independent of the departure time.
@@ -31,3 +31,19 @@ Now use docker-compose to start the built image. To start the docker image, issu
    **docker-compose -f docker/common/docker-compose.yml up**
 
 If everything starts correctly you should see a bunch of Spring Boot information fly by on standard out.  At this point all of the services will be running.
+
+# Testing the services
+
+Eureka server:
+http://localhost:8761/
+
+config server:
+http://localhost:8888/cityservice/default
+
+city service:
+http://localhost:8080/v1/city/all
+http://localhost:8080/v1/city/adjacents/casablanca
+
+itinerary service:
+http://localhost:8085/v1/itinerary/sortest?from=TETOUAN&to=agadir&criteria=connections
+http://localhost:8085/v1/itinerary/sortest?from=tetouan&to=dakhla
