@@ -1,0 +1,50 @@
+version: '2'
+services:
+  eurekaserver:
+     image:   badre/eurekasvr:latest
+     ports:
+         - "8761:8761"
+  configserver:
+      image: badre/confsvr:latest
+      ports:
+         - "8888:8888"
+      environment:
+         EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+         EUREKASERVER_PORT: "8761"
+         ENCRYPT_KEY:       "IMSYMMETRIC"
+  database:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'p9ssw9rd'
+      MYSQL_ROOT_PASSWORD: 'p@ssw0rd'
+      MYSQL_DATABASE: 'city_local'
+  cityservice:
+      image: badre/city-service:latest
+      ports:
+        - "8080:8080"
+        - "8090:8090"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: "8080"
+        CONFIGSERVER_URI: "http://configserver:8888"
+        EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+        CONFIGSERVER_PORT:   "8888"
+        DATABASESERVER_PORT: "3306"
+        EUREKASERVER_PORT:   "8761"
+        ENCRYPT_KEY:       "IMSYMMETRIC"
+  itineraryservice:
+      image: badre/itinerary-service:latest
+      ports:
+        - "8085:8085"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: "8085"
+        CONFIGSERVER_URI: "http://configserver:8888"
+        EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+        CONFIGSERVER_PORT:   "8888"
+        DATABASESERVER_PORT: "3306"
+        EUREKASERVER_PORT:   "8761"
+        ENCRYPT_KEY:       "IMSYMMETRIC"
